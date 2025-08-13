@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Chess Club</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-chess-king"></i>
+                <span>Chess Club</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="tournaments.html" class="nav-link">Tournaments</a>
+                </li>
+                <li class="nav-item">
+                    <a href="blog.html" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="donations.html" class="nav-link">Donations</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item" id="dashboard-link">
+                    <a href="dashboard.html" class="nav-link active">Dashboard</a>
+                </li>
+                <li class="nav-item" id="admin-link" style="display: none;">
+                    <a href="admin/" class="nav-link">Admin</a>
+                </li>
+            </ul>
+            
+            <!-- Authentication Container -->
+            <div id="auth-container" class="auth-container">
+                <button class="btn btn-primary" onclick="openAuthModal()">Sign In</button>
+            </div>
+            
+            <!-- User Info (hidden when not signed in) -->
+            <div id="user-info" class="user-info" style="display: none;"></div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Member Dashboard</h1>
+            <p>Welcome back! Here's your chess club activity overview.</p>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <img id="profile-avatar" src="images/default-avatar.png" alt="Profile Picture">
+                    </div>
+                    <div class="profile-info">
+                        <h2 id="profile-name">Loading...</h2>
+                        <p id="profile-email">Loading...</p>
+                        <p id="profile-status">Loading...</p>
+                        <button class="btn btn-secondary" onclick="openEditProfileModal()">Edit Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <h2>Your Chess Club Activity</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3 id="tournaments-played">0</h3>
+                    <p>Tournaments Played</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-chess-king"></i>
+                    <h3 id="games-won">0</h3>
+                    <p>Games Won</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-heart"></i>
+                    <h3 id="donations-made">0</h3>
+                    <p>Donations Made</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3 id="days-member">0</h3>
+                    <p>Days as Member</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patronage Section -->
+    <section class="patronage-section">
+        <div class="container">
+            <h2>Your Patronage</h2>
+            <div id="patronage-info" class="patronage-card">
+                <!-- Patronage information will be loaded dynamically -->
+            </div>
+            <div class="patronage-actions">
+                <a href="donations.html" class="btn btn-primary">Make a Donation</a>
+                <button class="btn btn-secondary" onclick="openRenewalModal()">View Donation History</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tournament History -->
+    <section class="tournament-history">
+        <div class="container">
+            <h2>Tournament History</h2>
+            <div class="tournament-table-container">
+                <table id="tournament-history-table" class="tournament-table">
+                    <thead>
+                        <tr>
+                            <th>Tournament</th>
+                            <th>Date</th>
+                            <th>Format</th>
+                            <th>Result</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Tournament history will be loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events -->
+    <section class="upcoming-events-dashboard">
+        <div class="container">
+            <h2>Upcoming Events</h2>
+            <div id="upcoming-events-dashboard" class="events-grid">
+                <!-- Upcoming events will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Edit Profile Modal -->
+    <div id="edit-profile-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('edit-profile-modal')">&times;</span>
+            <h2>Edit Profile</h2>
+            <form id="edit-profile-form" class="profile-form">
+                <div class="form-group">
+                    <label for="edit-name">Full Name *</label>
+                    <input type="text" id="edit-name" name="edit-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-phone">Phone Number</label>
+                    <input type="tel" id="edit-phone" name="edit-phone">
+                </div>
+                <div class="form-group">
+                    <label for="edit-bio">Bio</label>
+                    <textarea id="edit-bio" name="edit-bio" rows="3" placeholder="Tell us about yourself..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="edit-chess-level">Chess Level</label>
+                    <select id="edit-chess-level" name="edit-chess-level">
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                        <option value="expert">Expert</option>
+                        <option value="master">Master</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Donation History Modal -->
+    <div id="renewal-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('renewal-modal')">&times;</span>
+            <h2>Your Donation History</h2>
+            <div id="donation-history-content">
+                <!-- Donation history will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Chess Club</h3>
+                    <p>Building a community of chess enthusiasts since 2024.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="tournaments.html">Tournaments</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="donations.html">Donations</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-envelope"></i> info@chessclub.com</p>
+                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Chess Street, City</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Chess Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Google Sign-In API -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="js/auth.js"></script>
+    <script src="js/auth-modal.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html> 

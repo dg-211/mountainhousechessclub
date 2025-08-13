@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournaments - Chess Club</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-chess-king"></i>
+                <span>Chess Club</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="tournaments.html" class="nav-link active">Tournaments</a>
+                </li>
+                <li class="nav-item">
+                    <a href="blog.html" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="donations.html" class="nav-link">Donations</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item" id="dashboard-link" style="display: none;">
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item" id="admin-link" style="display: none;">
+                    <a href="admin/" class="nav-link">Admin</a>
+                </li>
+            </ul>
+            
+            <!-- Authentication Container -->
+            <div id="auth-container" class="auth-container">
+                <button class="btn btn-primary" onclick="openAuthModal()">Sign In</button>
+            </div>
+            
+            <!-- User Info (hidden when not signed in) -->
+            <div id="user-info" class="user-info" style="display: none;"></div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Tournaments</h1>
+            <p>Compete in our chess tournaments and test your skills</p>
+        </div>
+    </section>
+
+    <!-- Tournament Filters -->
+    <section class="tournament-filters">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterTournaments('all')">All</button>
+                <button class="filter-btn" onclick="filterTournaments('upcoming')">Upcoming</button>
+                <button class="filter-btn" onclick="filterTournaments('past')">Past</button>
+                <button class="filter-btn" onclick="filterTournaments('blitz')">Blitz</button>
+                <button class="filter-btn" onclick="filterTournaments('rapid')">Rapid</button>
+                <button class="filter-btn" onclick="filterTournaments('classical')">Classical</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Tournaments -->
+    <section class="upcoming-tournaments">
+        <div class="container">
+            <h2>Upcoming Tournaments</h2>
+            <div id="upcoming-tournaments" class="tournaments-grid">
+                <!-- Tournaments will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Past Tournaments -->
+    <section class="past-tournaments">
+        <div class="container">
+            <h2>Past Tournaments</h2>
+            <div class="tournaments-table-container">
+                <table id="past-tournaments-table" class="tournaments-table">
+                    <thead>
+                        <tr>
+                            <th>Tournament Name</th>
+                            <th>Date</th>
+                            <th>Format</th>
+                            <th>Winner</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Past tournaments will be loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tournament Registration Modal -->
+    <div id="registration-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registration-modal')">&times;</span>
+            <h2>Tournament Registration</h2>
+            <form id="registration-form" class="registration-form">
+                <div class="form-group">
+                    <label for="player-name">Full Name *</label>
+                    <input type="text" id="player-name" name="player-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="player-email">Email Address *</label>
+                    <input type="email" id="player-email" name="player-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="player-section">Section/Division</label>
+                    <select id="player-section" name="player-section">
+                        <option value="open">Open Section</option>
+                        <option value="u1800">Under 1800</option>
+                        <option value="u1600">Under 1600</option>
+                        <option value="u1400">Under 1400</option>
+                        <option value="u1200">Under 1200</option>
+                        <option value="unrated">Unrated</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="player-phone">Phone Number</label>
+                    <input type="tel" id="player-phone" name="player-phone">
+                </div>
+                <div class="form-group">
+                    <label for="player-notes">Special Requirements</label>
+                    <textarea id="player-notes" name="player-notes" rows="3" placeholder="Any special accommodations or requirements..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="agree-terms" name="agree-terms" required>
+                        <span class="checkmark"></span>
+                        I agree to the tournament rules and terms
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Complete Registration</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tournament Details Modal -->
+    <div id="tournament-details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('tournament-details-modal')">&times;</span>
+            <div id="tournament-details-content">
+                <!-- Tournament details will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Chess Club</h3>
+                    <p>Building a community of chess enthusiasts since 2024.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="tournaments.html">Tournaments</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="donations.html">Donations</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-envelope"></i> info@chessclub.com</p>
+                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Chess Street, City</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Chess Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Google Sign-In API -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="js/auth.js"></script>
+    <script src="js/auth-modal.js"></script>
+    <script src="js/tournaments.js"></script>
+</body>
+</html> 

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Club - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-chess-king"></i>
+                <span>Chess Club</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="tournaments.html" class="nav-link">Tournaments</a>
+                </li>
+                <li class="nav-item">
+                    <a href="blog.html" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="donations.html" class="nav-link">Donations</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item" id="dashboard-link" style="display: none;">
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item" id="admin-link" style="display: none;">
+                    <a href="admin/" class="nav-link">Admin</a>
+                </li>
+            </ul>
+            
+            <!-- Authentication Container -->
+            <div id="auth-container" class="auth-container">
+                <button class="btn btn-primary" onclick="openAuthModal()">Sign In</button>
+            </div>
+            
+            <!-- User Info (hidden when not signed in) -->
+            <div id="user-info" class="user-info" style="display: none;"></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Welcome to the Chess Club</h1>
+                <p>Join our community of chess enthusiasts. Play, learn, and compete in a friendly environment.</p>
+                <div class="hero-buttons">
+                    <a href="tournaments.html" class="btn btn-primary">View Tournaments</a>
+                    <a href="donations.html" class="btn btn-secondary">Support Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Why Join Our Chess Club?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Regular Tournaments</h3>
+                    <p>Participate in weekly tournaments and compete for prizes</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Learn & Improve</h3>
+                    <p>Get coaching from experienced players and improve your game</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Community</h3>
+                    <p>Meet fellow chess enthusiasts and make new friends</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chess-board"></i>
+                    <h3>Quality Equipment</h3>
+                    <p>Play with professional chess sets and clocks</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section class="upcoming-events">
+        <div class="container">
+            <h2>Upcoming Events</h2>
+            <div id="upcoming-events" class="events-grid">
+                <!-- Events will be loaded dynamically -->
+            </div>
+            <div class="events-cta">
+                <a href="tournaments.html" class="btn btn-primary">View All Events</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Blog Posts Section -->
+    <section class="latest-posts">
+        <div class="container">
+            <h2>Latest News</h2>
+            <div id="latest-posts" class="posts-grid">
+                <!-- Blog posts will be loaded dynamically -->
+            </div>
+            <div class="posts-cta">
+                <a href="blog.html" class="btn btn-secondary">Read All Posts</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Chess Club</h3>
+                    <p>Building a community of chess enthusiasts since 2024.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="tournaments.html">Tournaments</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="donations.html">Donations</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-envelope"></i> info@chessclub.com</p>
+                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Chess Street, City</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Chess Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Google Sign-In API -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="js/auth.js"></script>
+    <script src="js/auth-modal.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 

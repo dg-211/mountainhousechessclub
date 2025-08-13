@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Chess Club</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-chess-king"></i>
+                <span>Chess Club</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="tournaments.html" class="nav-link">Tournaments</a>
+                </li>
+                <li class="nav-item">
+                    <a href="blog.html" class="nav-link active">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="donations.html" class="nav-link">Donations</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item" id="dashboard-link" style="display: none;">
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item" id="admin-link" style="display: none;">
+                    <a href="admin/" class="nav-link">Admin</a>
+                </li>
+            </ul>
+            
+            <!-- Authentication Container -->
+            <div id="auth-container" class="auth-container">
+                <button class="btn btn-primary" onclick="openAuthModal()">Sign In</button>
+            </div>
+            
+            <!-- User Info (hidden when not signed in) -->
+            <div id="user-info" class="user-info" style="display: none;"></div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Blog & News</h1>
+            <p>Stay updated with the latest chess club news, tournament recaps, and strategy tips</p>
+        </div>
+    </section>
+
+    <!-- Blog Filters and Search -->
+    <section class="blog-controls">
+        <div class="container">
+            <div class="blog-filters">
+                <button class="blog-filter-btn active" onclick="filterBlogPosts('all')">All Posts</button>
+                <button class="blog-filter-btn" onclick="filterBlogPosts('tournament-recaps')">Tournament Recaps</button>
+                <button class="blog-filter-btn" onclick="filterBlogPosts('club-news')">Club News</button>
+                <button class="blog-filter-btn" onclick="filterBlogPosts('member-spotlights')">Member Spotlights</button>
+                <button class="blog-filter-btn" onclick="filterBlogPosts('strategy-tips')">Strategy Tips</button>
+            </div>
+            <div class="blog-search">
+                <input type="text" id="search-input" placeholder="Search posts...">
+                <button onclick="searchPosts()" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="blog-posts">
+        <div class="container">
+            <div id="blog-posts-grid" class="posts-grid">
+                <!-- Blog posts will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Post Modal -->
+    <div id="blog-post-modal" class="modal">
+        <div class="modal-content blog-post-content">
+            <span class="close" onclick="closeModal('blog-post-modal')">&times;</span>
+            <div id="blog-post-full">
+                <!-- Full blog post content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Chess Club</h3>
+                    <p>Building a community of chess enthusiasts since 2024.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="tournaments.html">Tournaments</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="donations.html">Donations</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-envelope"></i> info@chessclub.com</p>
+                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Chess Street, City</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Chess Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Google Sign-In API -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="js/auth.js"></script>
+    <script src="js/auth-modal.js"></script>
+    <script src="js/blog.js"></script>
+</body>
+</html> 

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donations - Chess Club</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-chess-king"></i>
+                <span>Chess Club</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="tournaments.html" class="nav-link">Tournaments</a>
+                </li>
+                <li class="nav-item">
+                    <a href="blog.html" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="donations.html" class="nav-link active">Donations</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item" id="dashboard-link" style="display: none;">
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item" id="admin-link" style="display: none;">
+                    <a href="admin/" class="nav-link">Admin</a>
+                </li>
+            </ul>
+            
+            <!-- Authentication Container -->
+            <div id="auth-container" class="auth-container">
+                <button class="btn btn-primary" onclick="openAuthModal()">Sign In</button>
+            </div>
+            
+            <!-- User Info (hidden when not signed in) -->
+            <div id="user-info" class="user-info" style="display: none;"></div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Support Our Chess Club</h1>
+            <p>Become a patron and help us grow the chess community</p>
+        </div>
+    </section>
+
+    <!-- Donation Options -->
+    <section class="donation-options">
+        <div class="container">
+            <h2>Become a Patron</h2>
+            <p class="donation-intro">Your support helps us organize tournaments, maintain equipment, and grow our community. Choose a patronage level that works for you.</p>
+            
+            <div class="patronage-tiers">
+                <div class="tier-card">
+                    <div class="tier-header">
+                        <h3>Bronze Patron</h3>
+                        <div class="tier-price">$25</div>
+                    </div>
+                    <ul class="tier-benefits">
+                        <li><i class="fas fa-check"></i> Club newsletter</li>
+                        <li><i class="fas fa-check"></i> Early tournament registration</li>
+                        <li><i class="fas fa-check"></i> Patron recognition</li>
+                        <li><i class="fas fa-check"></i> Access to club events</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="selectDonationTier('bronze', 25)">Become Bronze Patron</button>
+                </div>
+                
+                <div class="tier-card featured">
+                    <div class="tier-badge">Most Popular</div>
+                    <div class="tier-header">
+                        <h3>Silver Patron</h3>
+                        <div class="tier-price">$50</div>
+                    </div>
+                    <ul class="tier-benefits">
+                        <li><i class="fas fa-check"></i> All Bronze benefits</li>
+                        <li><i class="fas fa-check"></i> Tournament fee discounts</li>
+                        <li><i class="fas fa-check"></i> Priority seating at events</li>
+                        <li><i class="fas fa-check"></i> Exclusive strategy sessions</li>
+                        <li><i class="fas fa-check"></i> Patron name on club wall</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="selectDonationTier('silver', 50)">Become Silver Patron</button>
+                </div>
+                
+                <div class="tier-card">
+                    <div class="tier-header">
+                        <h3>Gold Patron</h3>
+                        <div class="tier-price">$100</div>
+                    </div>
+                    <ul class="tier-benefits">
+                        <li><i class="fas fa-check"></i> All Silver benefits</li>
+                        <li><i class="fas fa-check"></i> Free tournament entry</li>
+                        <li><i class="fas fa-check"></i> Personal coaching session</li>
+                        <li><i class="fas fa-check"></i> VIP event invitations</li>
+                        <li><i class="fas fa-check"></i> Club equipment naming rights</li>
+                        <li><i class="fas fa-check"></i> Annual patron dinner</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="selectDonationTier('gold', 100)">Become Gold Patron</button>
+                </div>
+            </div>
+            
+            <div class="custom-donation">
+                <h3>Custom Donation</h3>
+                <p>Want to support us with a different amount? Every contribution helps!</p>
+                <div class="custom-amount-form">
+                    <input type="number" id="custom-amount" placeholder="Enter amount ($)" min="1" step="1">
+                    <button class="btn btn-secondary" onclick="selectCustomDonation()">Donate</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact-section">
+        <div class="container">
+            <h2>Your Impact</h2>
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Tournaments</h3>
+                    <p>Funds help us organize more tournaments and provide better prizes</p>
+                </div>
+                <div class="impact-item">
+                    <i class="fas fa-chess-board"></i>
+                    <h3>Equipment</h3>
+                    <p>Quality chess sets, clocks, and tournament equipment</p>
+                </div>
+                <div class="impact-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Education</h3>
+                    <p>Coaching sessions and strategy workshops for all skill levels</p>
+                </div>
+                <div class="impact-item">
+                    <i class="fas fa-users"></i>
+                    <h3>Community</h3>
+                    <p>Growing our chess community and making it accessible to everyone</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Patrons -->
+    <section class="patrons-section">
+        <div class="container">
+            <h2>Our Current Patrons</h2>
+            <div class="patrons-grid" id="patrons-grid">
+                <!-- Patrons will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Modal -->
+    <div id="donation-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('donation-modal')">&times;</span>
+            <h2>Complete Your Donation</h2>
+            <form id="donation-form" class="donation-form">
+                <div class="form-group">
+                    <label for="donor-name">Full Name *</label>
+                    <input type="text" id="donor-name" name="donor-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="donor-email">Email Address *</label>
+                    <input type="email" id="donor-email" name="donor-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="donation-amount">Donation Amount *</label>
+                    <input type="text" id="donation-amount" name="donation-amount" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="donation-tier">Patronage Tier</label>
+                    <input type="text" id="donation-tier" name="donation-tier" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="donation-message">Message (Optional)</label>
+                    <textarea id="donation-message" name="donation-message" rows="3" placeholder="Share why you're supporting our chess club..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="anonymous-donation" name="anonymous-donation">
+                        <span class="checkmark"></span>
+                        Make this donation anonymous
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Complete Donation</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Chess Club</h3>
+                    <p>Building a community of chess enthusiasts since 2024.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="tournaments.html">Tournaments</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="donations.html">Donations</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-envelope"></i> info@chessclub.com</p>
+                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Chess Street, City</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Chess Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Google Sign-In API -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="js/auth.js"></script>
+    <script src="js/donations.js"></script>
+</body>
+</html> 

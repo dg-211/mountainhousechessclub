@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Chess Club</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-chess-king"></i>
+                <span>Chess Club Admin</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">← Back to Site</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../dashboard.html" class="nav-link">Member Dashboard</a>
+                </li>
+            </ul>
+            
+            <!-- User Info -->
+            <div id="user-info" class="user-info"></div>
+        </div>
+    </nav>
+
+    <!-- Admin Container -->
+    <div class="admin-container">
+        <!-- Admin Sidebar -->
+        <div class="admin-sidebar">
+            <div class="admin-sidebar-header">
+                <h3>Admin Panel</h3>
+                <button id="admin-sidebar-toggle" class="admin-sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <ul class="admin-nav">
+                <li><a href="#dashboard" class="admin-nav-link active" onclick="loadAdminSection('dashboard')">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a></li>
+                <li><a href="#users" class="admin-nav-link" onclick="loadAdminSection('users')">
+                    <i class="fas fa-users"></i> User Management
+                </a></li>
+                <li><a href="#tournaments" class="admin-nav-link" onclick="loadAdminSection('tournaments')">
+                    <i class="fas fa-trophy"></i> Tournament Management
+                </a></li>
+                <li><a href="#blog" class="admin-nav-link" onclick="loadAdminSection('blog')">
+                    <i class="fas fa-newspaper"></i> Blog Management
+                </a></li>
+                <li><a href="#donations" class="admin-nav-link" onclick="loadAdminSection('donations')">
+                    <i class="fas fa-heart"></i> Donation Management
+                </a></li>
+                <li><a href="#announcements" class="admin-nav-link" onclick="loadAdminSection('announcements')">
+                    <i class="fas fa-bullhorn"></i> Announcements
+                </a></li>
+                <li><a href="#settings" class="admin-nav-link" onclick="loadAdminSection('settings')">
+                    <i class="fas fa-cog"></i> Settings
+                </a></li>
+            </ul>
+        </div>
+
+        <!-- Admin Main Content -->
+        <div class="admin-main">
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="admin-section">
+                <div class="admin-section-header">
+                    <h2>Dashboard Overview</h2>
+                    <p>Welcome to the Chess Club Admin Panel</p>
+                </div>
+                
+                <div class="admin-stats-grid">
+                    <div class="admin-stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-users">0</h3>
+                            <p>Total Users</p>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-tournaments">0</h3>
+                            <p>Total Tournaments</p>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-posts">0</h3>
+                            <p>Blog Posts</p>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-donations">0</h3>
+                            <p>Total Donations</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="admin-recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div id="recent-activity-list">
+                        <!-- Recent activity will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Section -->
+            <div id="users" class="admin-section" style="display: none;">
+                <div class="admin-section-header">
+                    <h2>User Management</h2>
+                    <button class="btn btn-primary" onclick="openAddUserModal()">
+                        <i class="fas fa-plus"></i> Add New User
+                    </button>
+                </div>
+                
+                <div class="admin-search-bar">
+                    <input type="text" id="user-search" placeholder="Search users...">
+                    <select id="user-role-filter">
+                        <option value="">All Roles</option>
+                        <option value="member">Member</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                
+                <div class="admin-table-container">
+                    <table class="admin-table" id="users-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Join Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Users will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tournaments Section -->
+            <div id="tournaments" class="admin-section" style="display: none;">
+                <div class="admin-section-header">
+                    <h2>Tournament Management</h2>
+                    <button class="btn btn-primary" onclick="openAddTournamentModal()">
+                        <i class="fas fa-plus"></i> Add New Tournament
+                    </button>
+                </div>
+                
+                <div class="admin-search-bar">
+                    <input type="text" id="tournament-search" placeholder="Search tournaments...">
+                    <select id="tournament-status-filter">
+                        <option value="">All Status</option>
+                        <option value="upcoming">Upcoming</option>
+                        <option value="ongoing">Ongoing</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+                
+                <div class="admin-table-container">
+                    <table class="admin-table" id="tournaments-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Format</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                                <th>Participants</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Tournaments will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Blog Section -->
+            <div id="blog" class="admin-section" style="display: none;">
+                <div class="admin-section-header">
+                    <h2>Blog Management</h2>
+                    <button class="btn btn-primary" onclick="openAddBlogPostModal()">
+                        <i class="fas fa-plus"></i> Add New Post
+                    </button>
+                </div>
+                
+                <div class="admin-search-bar">
+                    <input type="text" id="blog-search" placeholder="Search posts...">
+                    <select id="blog-status-filter">
+                        <option value="">All Status</option>
+                        <option value="draft">Draft</option>
+                        <option value="published">Published</option>
+                    </select>
+                </div>
+                
+                <div class="admin-table-container">
+                    <table class="admin-table" id="blog-posts-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th>Publish Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Blog posts will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Donations Section -->
+            <div id="donations" class="admin-section" style="display: none;">
+                <div class="admin-section-header">
+                    <h2>Donation Management</h2>
+                    <p>View and manage all club donations</p>
+                </div>
+                
+                <div class="admin-search-bar">
+                    <input type="text" id="donation-search" placeholder="Search donations...">
+                    <select id="donation-tier-filter">
+                        <option value="">All Tiers</option>
+                        <option value="bronze">Bronze</option>
+                        <option value="silver">Silver</option>
+                        <option value="gold">Gold</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                </div>
+                
+                <div class="admin-table-container">
+                    <table class="admin-table" id="donations-table">
+                        <thead>
+                            <tr>
+                                <th>Donor</th>
+                                <th>Amount</th>
+                                <th>Tier</th>
+                                <th>Date</th>
+                                <th>Message</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Donations will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Announcements Section -->
+            <div id="announcements" class="admin-section" style="display: none;">
+                <div class="admin-section-header">
+                    <h2>Announcements & Newsletter</h2>
+                    <button class="btn btn-primary" onclick="openAddAnnouncementModal()">
+                        <i class="fas fa-plus"></i> New Announcement
+                    </button>
+                </div>
+                
+                <div class="announcement-form">
+                    <h3>Send Announcement</h3>
+                    <form id="announcement-form">
+                        <div class="form-group">
+                            <label for="announcement-title">Title</label>
+                            <input type="text" id="announcement-title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="announcement-content">Content</label>
+                            <textarea id="announcement-content" rows="5" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="announcement-audience">Audience</label>
+                            <select id="announcement-audience" required>
+                                <option value="all">All Members</option>
+                                <option value="patrons">Patrons Only</option>
+                                <option value="admins">Admins Only</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Announcement</button>
+                    </form>
+                </div>
+                
+                <div class="sent-announcements">
+                    <h3>Sent Announcements</h3>
+                    <div id="sent-announcements-list">
+                        <!-- Sent announcements will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings" class="admin-section" style="display: none;">
+                <div class="admin-section-header">
+                    <h2>Site Settings</h2>
+                    <p>Configure club website settings</p>
+                </div>
+                
+                <div class="settings-form">
+                    <form id="site-settings-form">
+                        <div class="form-group">
+                            <label for="club-name">Club Name</label>
+                            <input type="text" id="club-name" value="Chess Club">
+                        </div>
+                        <div class="form-group">
+                            <label for="club-email">Contact Email</label>
+                            <input type="email" id="club-email" value="info@chessclub.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="club-phone">Contact Phone</label>
+                            <input type="tel" id="club-phone" value="(555) 123-4567">
+                        </div>
+                        <div class="form-group">
+                            <label for="club-address">Club Address</label>
+                            <textarea id="club-address" rows="3">123 Chess Street, City</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="club-description">Club Description</label>
+                            <textarea id="club-description" rows="4">Building a community of chess enthusiasts since 2024.</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Settings</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Sign-In API -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/auth-modal.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html> 
